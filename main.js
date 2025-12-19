@@ -17,7 +17,7 @@ let history = [];
 async function fetchHistory() {
   try {
     // Request conversion history from the server -- port 3001 is correct I checked 
-    const res = await fetch("http://localhost:3001/api/history");
+    const res = await fetch("/api/history");
     
     if (!res.ok) throw new Error("Failed to fetch history");
 
@@ -40,7 +40,7 @@ async function saveConversion(from, to, amount) {
     resultEl.textContent = "Converting...";
 
     // Send conversion data to the server
-    const res = await fetch("http://localhost:3001/api/save-conversion", {
+    const res = await fetch(""/api/save-conversion", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ from, to, amount })
