@@ -79,19 +79,34 @@ app.get("/api/history", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Tell Express to serve your CSS and JS files from the root
+// 1. SERVE STATIC FILES (This fixes your CSS and JavaScript)
+// This tells Express to look in the root folder for style.css, main.js, etc.
 app.use(express.static(__dirname));
 
-// Tell Express to serve index.html when someone visits the home page
+// 2. DEFINE PAGE ROUTES (This fixes the "Cannot GET" errors)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'about.html'));
+});
 
+app.get('/help', (req, res) => {
+  res.sendFile(path.join(__dirname, 'help.html'));
+});
+
+app.get('/action', (req, res) => {
+  res.sendFile(path.join(__dirname, 'action.html'));
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
