@@ -21,65 +21,65 @@ To run this application locally, you will need the following installed on your m
 - A Supabase account and project
 
 ### Step 1: Clone the Repository
-```bash
+
 git clone https://github.com/your-username/study-abroad-pay.git
 cd study-abroad-pay
-'''bash
+
 ### Step 2: Install Dependencies
 Navigate to the server directory and install dependencies:
 cd server
 npm install
 
-###Step 3: Environment Variables
+### Step 3: Environment Variables
 Create a .env file inside the server directory and add the following variables:
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_KEY=your_supabase_anon_key
 PORT=3001
 These values are required for connecting to the Supabase database and running the server.
 
-##Running the Application
+#### Running the Application
 
-##Running the Backend Server
+#### Running the Backend Server
 From the server directory, start the Express server using:
 node server.js
 The server will run on:
 http://localhost:3001
 
-##Running the Frontend
+#### Running the Frontend
 
 You can run the frontend using a local development server such as Live Server in VS Code or any static file server.
 Once running, the frontend will communicate with the backend at:
 http://localhost:3001
 
-##Running Tests
+#### Running Tests
 
 This project does not currently include automated tests.
 Future developers are encouraged to add unit tests for API endpoints and frontend logic using tools such as Jest or Mocha.
 
-##API Documentation
+#### API Documentation
 
 The backend server exposes the following API endpoints.
 
-##POST /api/save-conversion
+#### POST /api/save-conversion
 
-##Description:
+#### Description:
 
 Converts a currency amount and saves the result to the database.
-##Request Body:
+#### Request Body:
 {
   "from": "USD",
   "to": "EUR",
   "amount": 100
 }
-##Response:
+#### Response:
 {
   "result": 92.5,
   "message": "Saved to database"
 }
-##GET /api/history
-##Description:
+#### GET /api/history
+#### Description:
 Retrieves all saved currency conversion history from the database, ordered by most recent.
-##Response:
+#### Response:
 [
   {
     "id": 1,
@@ -91,13 +91,13 @@ Retrieves all saved currency conversion history from the database, ordered by mo
   }
 ]
 
-###Known Issues
+## Known Issues
 The chart will not display until at least one conversion has been saved
 There is no user authentication, so all conversions are shared
 Error handling for network failures is minimal
 The backend must be running for conversions to work
 
-###Future Development Roadmap
+## Future Development Roadmap
 Planned improvements for future versions of the application include:
 User authentication and per-user conversion history
 Support for additional currencies
@@ -105,5 +105,5 @@ Improved error handling and user feedback
 Automated testing for backend endpoints
 Deployment to a production hosting environment
 
-###Documentation Location
+## Documentation Location
 All documentation for this project is included in the main project directory under the docs.md
