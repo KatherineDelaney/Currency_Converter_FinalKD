@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- Declares the document type as HTML5 -->
+<html lang="en">
+<head>
+  <!-- Sets the character encoding -->
+  <meta charset="UTF-8">
+
+  <!-- Makes the page responsive on different screen sizes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title shown in the browser tab -->
+  <title>Study Abroad Currency Converter</title>
+
+  <!-- Links the main stylesheet for page styling -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Animate.css library for fade-in page animation -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <!-- Chart.js library for displaying charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<!-- Applies a fade-in animation when the page loads -->
+<body class="animate__animated animate__fadeIn">
+
+  <!-- Main navigation bar -->
+  <nav class="main-nav">
+
+    <!-- Logo name -->
+    <div class="nav-logo">
+      StudyAbroad<span>Currency Converter</span>
+    </div>
+
+    <!-- Navigation links to different pages -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="action.html">History</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+    </div>
+  </nav>
+
+  <!-- Main content container styled as a card -->
+  <div class="page-container card">
+
+    <!-- Page heading -->
+    <h1>Currency Converter</h1>
+
+    <!-- Input field for the amount to convert -->
+    <input 
+      type="number" 
+      id="amount" 
+      placeholder="Enter amount"
+    >
+
+    <!-- Dropdown to select the currency being converted from -->
+    <select id="fromCurrency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+      <option value="CAD">CAD</option>
+    </select>
+
+    <!-- Dropdown to select the currency being converted to -->
+    <select id="toCurrency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+      <option value="CAD">CAD</option>
+    </select>
+
+    <!-- Button that triggers the currency conversion and saves it -->
+    <button id="convertBtn" class="btn">
+      Convert & Save
+    </button>
+
+    <!-- Displays the converted result -->
+    <p id="result"></p>
+
+    <!-- Canvas element for displaying the conversion chart -->
+    <canvas id="conversionChart" style="max-width:600px;"></canvas>
+  </div>
+
+  <!-- Links the JavaScript file that handles conversion logic and data -->
+  <script src="main.js"></script>
+
+</body>
+</html>

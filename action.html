@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- Declares the document type as HTML5 -->
+<html lang="en">
+<head>
+  <!-- Sets the character encoding -->
+  <meta charset="UTF-8">
+
+  <!-- Makes the page responsive on different screen sizes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title shown in the browser tab -->
+  <title>Conversion History | Study Abroad Pay</title>
+
+  <!-- Links the main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Animate.css library for fade-in animation -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <!-- Chart.js library for displaying charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<!-- Adds a fade-in animation when the page loads -->
+<body class="animate__animated animate__fadeIn">
+
+  <!-- Main navigation bar -->
+  <nav class="main-nav">
+
+    <!-- Logo name -->
+    <div class="nav-logo">
+      StudyAbroad<span>Currency Converter</span>
+    </div>
+
+    <!-- Navigation links -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="action.html">History</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+    </div>
+  </nav>
+
+  <!-- Main content container styled as a card -->
+  <div class="page-container card">
+
+    <!-- Page heading -->
+    <h1>Conversion History</h1>
+
+    <!-- Canvas element where the Chart.js graph will be rendered -->
+    <canvas id="conversionChart" style="max-width:600px;"></canvas>
+
+    <!-- Container where conversion history entries will be displayed -->
+    <div id="historyList" class="history-list"></div>
+  </div>
+
+  <!-- Links the main JavaScript file that handles logic and data -->
+  <script src="main.js"></script>
+
+</body>
+</html>
