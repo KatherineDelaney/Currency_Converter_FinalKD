@@ -1,6 +1,6 @@
 // Load environment variables from the .env file
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 // Import required packages
 import express from "express";
