@@ -16,7 +16,7 @@ let history = [];
  */
 async function fetchHistory() {
   try {
-    // Request conversion history from the server
+    // Request conversion history from the server -- port 3001 is correct I checked 
     const res = await fetch("http://localhost:3001/api/history");
     
     if (!res.ok) throw new Error("Failed to fetch history");
