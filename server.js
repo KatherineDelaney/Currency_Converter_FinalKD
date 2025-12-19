@@ -89,8 +89,8 @@ const __dirname = path.dirname(__filename);
 // This tells Express to look in the root folder for style.css, main.js, etc.
 app.use(express.static(__dirname));
 
-// 2. DEFINE PAGE ROUTES (This fixes the "Cannot GET" errors)
-app.get('/', (req, res) => {
+// 2. DEFINE PAGE ROUTES 
+app.get('/index', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
