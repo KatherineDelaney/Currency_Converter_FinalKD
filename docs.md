@@ -98,6 +98,7 @@ The chart will not display until at least one conversion has been saved
 There is no user authentication, so all conversions are shared
 Error handling for network failures is minimal
 The backend must be running for conversions to work
+Current known bug: Database connection requires specific environment variables. If the chart does not populate, please verify the .env configuration.
 
 ## Future Development Roadmap
 Planned improvements for future versions of the application include:
