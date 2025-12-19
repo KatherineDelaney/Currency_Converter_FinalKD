@@ -40,6 +40,8 @@ These values are required for connecting to the Supabase database and running th
 #### Running the Application
 
 #### Running the Backend Server
+
+This runs the application on a local development server.
 From the server directory, start the Express server using:
 node server.js
 The server will run on:
