@@ -52,7 +52,7 @@ app.get("/api/history", async (req, res) => {
 
 // --- PAGE ROUTES ---
 // This tells Vercel which HTML file to show for each link
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/index', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
 app.get('/help', (req, res) => res.sendFile(path.join(__dirname, 'help.html')));
 app.get('/action', (req, res) => res.sendFile(path.join(__dirname, 'action.html')));
