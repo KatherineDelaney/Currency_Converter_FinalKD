@@ -24,7 +24,7 @@ To run this application locally, you will need the following installed on your m
 ```bash
 git clone https://github.com/your-username/study-abroad-pay.git
 cd study-abroad-pay
-
+'''bash
 ### Step 2: Install Dependencies
 Navigate to the server directory and install dependencies:
 cd server
