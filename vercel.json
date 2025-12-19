@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/final_377/server.js"
+      "destination": "/server.js"
     },
     {
       "source": "/(.*)",
