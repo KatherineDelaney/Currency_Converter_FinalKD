@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
 // Ensure dotenv is configured here as well to be safe
-dotenv.config();
+// dotenv.config();
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
