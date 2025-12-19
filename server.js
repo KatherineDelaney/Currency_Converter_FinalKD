@@ -5,17 +5,20 @@
 // Import required packages
 import express from "express";
 import cors from "cors";
-import fetch from "node-fetch";
+import path from "path";
+import { fileURLToPath } from 'url';
 import supabase from "./supabaseClient.js";
 
-// Create the Express app
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Enable CORS so the frontend can talk to the backend
 app.use(cors());
-
-// Allow the server to accept JSON request bodies
 app.use(express.json());
+
+// THIS IS THE KEY: Serve all files in the current directory as static
+app.use(express.static(__dirname));
+
 
 // Define the port number 
 const PORT = process.env.PORT || 3001;
@@ -82,8 +85,6 @@ app.listen(PORT, () => {
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // 1. SERVE STATIC FILES (This fixes your CSS and JavaScript)
 // This tells Express to look in the root folder for style.css, main.js, etc.
