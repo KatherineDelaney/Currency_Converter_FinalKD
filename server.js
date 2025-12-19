@@ -79,3 +79,19 @@ app.get("/api/history", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Tell Express to serve your CSS and JS files from the root
+app.use(express.static(__dirname));
+
+// Tell Express to serve index.html when someone visits the home page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+
