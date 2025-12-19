@@ -1,12 +1,18 @@
-// Import the function used to create a Supabase client
 import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
 
-// Create a Supabase client using environment variables
-// SUPABASE_URL and SUPABASE_KEY are stored in the .env file for security
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+// Ensure dotenv is configured here as well to be safe
+dotenv.config();
 
-// Export the Supabase client so it can be used in other files
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+// Log to help you troubleshoot (you can remove this later)
+if (!supabaseUrl || !supabaseKey) {
+  console.error("❌ ERROR: Supabase environment variables are missing!");
+  console.log("Current Directory:", process.cwd());
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 export default supabase;
