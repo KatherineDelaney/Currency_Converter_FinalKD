@@ -14,10 +14,9 @@ const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(bodyParser.json());
-// Serve static files from the 'public' directory (style.css, main.js)
 app.use(express.static(__dirname + '/public'));
 
-// Routes to serve HTML pages from the public folder
+// HTML Routes
 app.get('/', (req, res) => res.sendFile('public/index.html', { root: __dirname }));
 app.get('/about', (req, res) => res.sendFile('public/about.html', { root: __dirname }));
 app.get('/help', (req, res) => res.sendFile('public/help.html', { root: __dirname }));
@@ -31,26 +30,37 @@ app.post('/api/save-conversion', async (req, res) => {
     const data = await response.json();
     const result = data.rates[to];
 
+    // Added parseFloat to ensure numbers are handled correctly by Supabase
     const { error } = await supabase
       .from('conversion_history')
-      .insert([{ from_currency: from, to_currency: to, amount, result }]);
+      .insert([{ 
+        from_currency: from, 
+        to_currency: to, 
+        amount: parseFloat(amount), 
+        result: parseFloat(result) 
+      }]);
 
     if (error) throw error;
     res.json({ result, message: "Saved to database" });
   } catch (err) {
+    console.error("Backend Error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
 // API Route: Fetch History
 app.get('/api/history', async (req, res) => {
-  const { data, error } = await supabase
-    .from('conversion_history')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('conversion_history')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
+    if (error) throw error;
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.listen(port, () => console.log('App is available on port:', port));
+app.listen(port, () => console.log('Server running on port:', port));
