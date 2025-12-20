@@ -41,34 +41,26 @@ body {
   z-index: 100;
 }
 
-.nav-logo {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--text-color);
-}
+.nav-logo { font-size: 1.8rem;
+   font-weight: 800; 
+   color: var(--text-color); }
+.nav-logo span { color: var(--primary); }
 
-.nav-logo span {
-  color: var(--primary);
-}
+.nav-links a { margin-left: 20px; 
+  text-decoration: none; 
+  color: #4a5568; 
+  font-weight: 600; 
+  transition: all 0.3s ease; 
+  position: relative; }
 
-.nav-links a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #4a5568;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background-color: var(--primary);
-  transition: width 0.3s ease;
+.nav-links a::after { content: ''; 
+  position: absolute; 
+  width: 0; 
+  height: 2px; 
+  bottom: -2px; 
+  left: 0; 
+  background-color: var(--primary); 
+  transition: width 0.3s ease; 
 }
 
 .nav-links a:hover::after { width: 100%; }
@@ -83,11 +75,7 @@ button.btn {
   font-size: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-button.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(44, 123, 229, 0.4);
-}
+button.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(44, 123, 229, 0.4); }
 
 input, select {
   padding: 10px;
@@ -98,8 +86,19 @@ input, select {
   width: 120px;
 }
 
-.result-text {
-  margin-top: 15px;
-  font-weight: bold;
-  color: var(--text-color);
+.result-text { margin-top: 15px; font-weight: bold; color: var(--text-color); }
+
+#ratesContainer table { width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 10px; 
+}
+
+#ratesContainer th, #ratesContainer td { border: 1px solid #ccc; 
+  padding: 8px; 
+  text-align: left; 
+}
+
+
+#ratesContainer th { background-color: var(--primary); 
+  color: white; 
 }
