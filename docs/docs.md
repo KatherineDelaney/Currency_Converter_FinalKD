@@ -21,14 +21,11 @@ To run this application locally, you will need the following installed on your m
 - A Supabase account and project
 
 ### Step 1: Clone the Repository
-
-git clone (https://github.com/KatherineDelaney/Currency_Converter_FinalKD/blob/main/docs/docs.md)
-cd Currency_Converter_FinalKD
+git clone https://github.com/KatherineDelaney/Currency_Converter_FinalKD.git
+cd Currency_Converter_FinalKD 
 
 ### Step 2: Install Dependencies
-Navigate to the server directory and install dependencies:
-cd server
-npm install
+Install dependencies from the root directory: npm install
 
 ### Step 3: Environment Variables
 Create a .env file in the root directory and add your Supabase credentials. These are used by index.js to connect to your database:
@@ -39,46 +36,43 @@ PORT=3000
 #### Running the Application
 
 ##### Running the Backend Server
-
 This runs the application on a local development server.
-From the server directory, start the Express server using:
-node server.js
+From the server directory, start the Express server using: 
+npm start (or node index.js)
 The server will run on:
 http://localhost:3000
 
 ##### Running the Frontend
-
 The frontend is served automatically by the backend. Once the server is running, simply open http://localhost:3000 in your browser. The server uses express.static to serve the public folder containing your HTML, CSS, and main.js.
 
 ##### Running Tests
-
 This project does not currently include automated tests.
 Future developers are encouraged to add unit tests for API endpoints and frontend logic using tools such as Jest or Mocha.
 
 #### API Documentation
-
 The backend server exposes the following API endpoints.
 
 ##### POST /api/save-conversion
-
 Description: Fetches live rates from Frankfurter API and saves the record to Supabase.
 
 Body: { "from": "USD", "to": "EUR", "amount": 100 }
 
 ##### Description:
-
 Converts a currency amount and saves the result to the database.
+
 ##### Request Body:
 {
   "from": "USD",
   "to": "EUR",
   "amount": 100
 }
+
 ##### Response:
 {
   "result": 92.5,
   "message": "Saved to database"
 }
+
 #### GET /api/history
 
 ##### Description:
@@ -112,4 +106,4 @@ Automated testing for backend endpoints
 Deployment to a production hosting environment
 
 ## Documentation Location
-All documentation for this project is included in the main project directory under the docs.md
+All documentation for this project is included in the main project directory under the docs.md in the docs folder. 
