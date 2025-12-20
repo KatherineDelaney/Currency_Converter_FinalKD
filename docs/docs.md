@@ -22,7 +22,8 @@ To run this application locally, you will need the following installed on your m
 
 ### Step 1: Clone the Repository
 
-git clone 
+git clone (https://github.com/KatherineDelaney/Currency_Converter_FinalKD/blob/main/docs/docs.md)
+cd Currency_Converter_FinalKD
 
 ### Step 2: Install Dependencies
 Navigate to the server directory and install dependencies:
