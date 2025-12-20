@@ -1,22 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion History</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <nav class="main-nav">
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/action">History</a>
-      <a href="/about">About</a>
-      <a href="/help">Help</a>
+    <nav class="main-nav">
+        <div class="nav-logo">StudyAbroad<span>Pay</span></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/action">History</a>
+            <a href="/about">About</a>
+            <a href="/help">Help</a>
+        </div>
+    </nav>
+
+    <div class="page-container card">
+        <h1 style="text-align: center;">Conversion History</h1>
+        <div class="chart-container">
+            <canvas id="conversionChart"></canvas>
+        </div>
+        <div id="historyList"></div>
     </div>
-  </nav>
 
-  <div class="page-container card">
-    <h1>Conversion History</h1>
-    <canvas id="conversionChart"></canvas>
-    <div id="historyList"></div>
-  </div>
-
-  <script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
+</html>
