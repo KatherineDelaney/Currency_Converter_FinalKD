@@ -1,66 +1,46 @@
-import express from "express";
-import cors from "cors";
 import fetch from "node-fetch";
-import path from "path";
-import { fileURLToPath } from 'url';
 import supabase from "./supabaseClient.js";
 
-const app = express();
+export default async function handler(req, res) {
+  const { method, url, body } = req;
 
-// Helper to find current folder
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+  // Save conversion
+  if (url === "/api/save-conversion" && method === "POST") {
+    const { from, to, amount } = body;
+    try {
+      const response = await fetch(
+        `https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`
+      );
+      const data = await response.json();
+      const result = data.rates[to];
 
-app.use(cors());
-app.use(express.json());
+      const { error } = await supabase
+        .from("conversion_history")
+        .insert([{ from_currency: from, to_currency: to, amount, result }]);
 
-// Serve static files from "public" folder
-app.use(express.static(path.join(__dirname, "public")));
-
-// --- API ROUTES ---
-app.post("/api/save-conversion", async (req, res) => {
-  const { from, to, amount } = req.body;
-  try {
-    const response = await fetch(
-      `https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`
-    );
-    const data = await response.json();
-    const result = data.rates[to];
-
-    const { error } = await supabase
-      .from("conversion_history")
-      .insert([{ from_currency: from, to_currency: to, amount, result }]);
-
-    if (error) throw error;
-    res.json({ result, message: "Saved to database" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+      if (error) throw error;
+      res.status(200).json({ result, message: "Saved to database" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+    return;
   }
-});
 
-app.get("/api/history", async (req, res) => {
-  const { data, error } = await supabase
-    .from("conversion_history")
-    .select("*")
-    .order("created_at", { ascending: false });
+  // Get conversion history
+  if (url === "/api/history" && method === "GET") {
+    try {
+      const { data, error } = await supabase
+        .from("conversion_history")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-  if (error) return res.status(500).json({ error: error.message });
-  res.json(data);
-});
+      if (error) throw error;
+      res.status(200).json(data);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+    return;
+  }
 
-// --- PAGE ROUTES ---
-const pages = ["index", "about", "help", "action"];
-pages.forEach(page => {
-  app.get(`/${page}`, (req, res) =>
-    res.sendFile(path.join(__dirname, "public", `${page}.html`))
-  );
-});
-
-// Export app for Vercel
-export default app;
-
-// Local server for testing
-const PORT = process.env.PORT || 3001;
-if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  res.status(404).json({ error: "Not Found" });
 }
