@@ -51,7 +51,9 @@ body {
   color: #4a5568; 
   font-weight: 600; 
   transition: all 0.3s ease; 
-  position: relative; }
+  position: relative;
+}
+             
 
 .nav-links a::after { content: ''; 
   position: absolute; 
@@ -96,6 +98,22 @@ input, select {
 #ratesContainer th, #ratesContainer td { border: 1px solid #ccc; 
   padding: 8px; 
   text-align: left; 
+}
+
+/* Center titles inside containers */
+.page-container h1 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+/* Ensure the chart doesn't overflow the container */
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 40vh;
+  width: 80vw;
+  max-width: 800px;
 }
 
 
