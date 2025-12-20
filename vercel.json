@@ -7,18 +7,11 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1",
-      "continue": true
-    },
-    {
-      "src": "/(.*)",
-      "dest": "index.js"
-    }
+    { "handle": "filesystem" },
+    { "src": "/api/(.*)", "dest": "index.js" },
+    { "src": "/action", "dest": "index.js" },
+    { "src": "/about", "dest": "index.js" },
+    { "src": "/help", "dest": "index.js" },
+    { "src": "/(.*)", "dest": "index.js" }
   ]
 }
