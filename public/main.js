@@ -10,6 +10,7 @@ const ratesContainer = document.getElementById("ratesContainer");
 let chart;
 let history = [];
 
+// Fetch conversion history from Supabase
 async function fetchHistory() {
   try {
     const res = await fetch("/api/history");
@@ -23,6 +24,7 @@ async function fetchHistory() {
   }
 }
 
+// Save conversion to Database via Express Backend
 async function saveConversion(from, to, amount) {
   try {
     if (resultEl) resultEl.textContent = "Converting...";
@@ -40,6 +42,7 @@ async function saveConversion(from, to, amount) {
       resultEl.textContent = `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
     }
 
+    // Refresh history and table
     fetchHistory();
     if (ratesContainer) fetchExchangeRates(from); 
   } catch (err) {
@@ -48,6 +51,7 @@ async function saveConversion(from, to, amount) {
   }
 }
 
+// Render the list of past conversions
 function renderHistoryList() {
   if (!historyList) return;
   historyList.innerHTML = history.map(item => `
@@ -58,6 +62,7 @@ function renderHistoryList() {
   `).join('');
 }
 
+// Update the Chart.js visual
 function updateChart() {
   if (!chartCanvas || history.length === 0) return;
   const lastTen = history.slice(0, 10).reverse();
@@ -82,20 +87,29 @@ function updateChart() {
   });
 }
 
+// Fetch exchange rates for the bottom table
 async function fetchExchangeRates(base = "USD") {
   if (!ratesContainer) return;
   try {
     const res = await fetch(`https://api.frankfurter.app/latest?from=${base}`);
     const data = await res.json();
-    let html = `<h3>Rates (Base: ${base})</h3><table><tr><th>Currency</th><th>Rate</th></tr>`;
-    for (const [currency, rate] of Object.entries(data.rates).slice(0, 8)) {
-      html += `<tr><td>${currency}</td><td>${rate.toFixed(4)}</td></tr>`;
+    
+    let html = `<h3 style="margin-top:20px;">Current Rates (Base: ${base})</h3><table style="width:100%; border-collapse: collapse;"><tr><th style="text-align:left;">Currency</th><th style="text-align:right;">Rate</th></tr>`;
+    
+    // Add any currency codes you want to show here
+    const common = ['EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CHF', 'CNY'];
+    
+    for (const [currency, rate] of Object.entries(data.rates)) {
+      if (common.includes(currency)) {
+        html += `<tr style="border-bottom: 1px solid #eee;"><td style="padding:8px 0;">${currency}</td><td style="text-align:right;">${rate.toFixed(4)}</td></tr>`;
+      }
     }
     html += `</table>`;
     ratesContainer.innerHTML = html;
   } catch (err) { console.error(err); }
 }
 
+// Button Listener
 if (convertBtn) {
   convertBtn.addEventListener("click", () => {
     const amount = parseFloat(amountInput.value);
@@ -109,6 +123,7 @@ if (convertBtn) {
   });
 }
 
+// Initial Load
 document.addEventListener("DOMContentLoaded", () => {
   fetchHistory();
   if (ratesContainer) fetchExchangeRates();
