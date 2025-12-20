@@ -31,15 +31,14 @@ cd server
 npm install
 
 ### Step 3: Environment Variables
-Create a .env file inside the server directory and add the following variables:
+Create a .env file in the root directory and add your Supabase credentials. These are used by index.js to connect to your database:
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_KEY=your_supabase_anon_key
-PORT=3001
-These values are required for connecting to the Supabase database and running the server.
+PORT=3000
 
 #### Running the Application
 
-#### Running the Backend Server
+##### Running the Backend Server
 
 This runs the application on a local development server.
 From the server directory, start the Express server using:
@@ -47,13 +46,11 @@ node server.js
 The server will run on:
 http://localhost:3000
 
-#### Running the Frontend
+##### Running the Frontend
 
-You can run the frontend using a local development server such as Live Server in VS Code or any static file server.
-Once running, the frontend will communicate with the backend at:
-http://localhost:3000
+The frontend is served automatically by the backend. Once the server is running, simply open http://localhost:3000 in your browser. The server uses express.static to serve the public folder containing your HTML, CSS, and main.js.
 
-#### Running Tests
+##### Running Tests
 
 This project does not currently include automated tests.
 Future developers are encouraged to add unit tests for API endpoints and frontend logic using tools such as Jest or Mocha.
@@ -62,26 +59,32 @@ Future developers are encouraged to add unit tests for API endpoints and fronten
 
 The backend server exposes the following API endpoints.
 
-#### POST /api/save-conversion
+##### POST /api/save-conversion
 
-#### Description:
+Description: Fetches live rates from Frankfurter API and saves the record to Supabase.
+
+Body: { "from": "USD", "to": "EUR", "amount": 100 }
+
+##### Description:
 
 Converts a currency amount and saves the result to the database.
-#### Request Body:
+##### Request Body:
 {
   "from": "USD",
   "to": "EUR",
   "amount": 100
 }
-#### Response:
+##### Response:
 {
   "result": 92.5,
   "message": "Saved to database"
 }
 #### GET /api/history
-#### Description:
+
+##### Description:
 Retrieves all saved currency conversion history from the database, ordered by most recent.
-#### Response:
+   
+##### Response:
 [
   {
     "id": 1,
