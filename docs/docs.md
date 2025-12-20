@@ -45,13 +45,13 @@ This runs the application on a local development server.
 From the server directory, start the Express server using:
 node server.js
 The server will run on:
-http://localhost:3001
+http://localhost:3000
 
 #### Running the Frontend
 
 You can run the frontend using a local development server such as Live Server in VS Code or any static file server.
 Once running, the frontend will communicate with the backend at:
-http://localhost:3001
+http://localhost:3000
 
 #### Running Tests
 
