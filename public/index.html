@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Abroad Currency</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css"> 
+</head>
 <body>
     <nav class="main-nav">
-        <div class="nav-logo">StudyAbroad<span>Currency Converter</span></div>
+        <div class="nav-logo">StudyAbroad<span>Pay</span></div>
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/action">History</a>
@@ -21,15 +22,21 @@
         <div class="converter-box">
             <input type="number" id="amount" placeholder="Amount" value="1">
             <select id="fromCurrency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="AUD">AUD - Australian Dollar</option>
             </select>
             <span>to</span>
             <select id="toCurrency">
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="AUD">AUD - Australian Dollar</option>
             </select>
             <button id="convertBtn">Convert & Save</button>
         </div>
@@ -37,8 +44,8 @@
         <h2 id="resultDisplay"></h2>
 
         <div id="ratesContainer"></div>
-        
     </div>
 
-    <script src="main.js"></script> </body>
+    <script src="main.js"></script> 
+</body>
 </html>
