@@ -17,6 +17,6 @@ The application is mobile responsive and can be used on iOS devices through the 
 
 ## Link to Developer Manual
 The Developer Manual for this project is included below and is also available in the docs folder of this repository.
-(https://github.com/KatherineDelaney/Currency_Converter_FinalKD/blob/main/docs/docs.md)
+(https://github.com/KatherineDelaney/Currency_Converter_FinalKD/blob/main/docs/developermanual.md)
 
 
