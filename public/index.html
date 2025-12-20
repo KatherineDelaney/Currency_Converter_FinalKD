@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Abroad Currency Converter</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="animate__animated animate__fadeIn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad Currency</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">StudyAbroad<span>Pay</span></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/action">History</a>
+            <a href="/about">About</a>
+            <a href="/help">Help</a>
+        </div>
+    </nav>
 
-  <nav class="main-nav">
-    <div class="nav-logo">StudyAbroad<span>Currency Converter</span></div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/action">History</a>
-      <a href="/about">About</a>
-      <a href="/help">Help</a>
+    <div class="container card">
+        <h1>Currency Converter</h1>
+        <div class="converter-box">
+            <input type="number" id="amount" placeholder="Amount" value="1">
+            <select id="fromCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <span>to</span>
+            <select id="toCurrency">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <button id="convertBtn">Convert & Save</button>
+        </div>
+        <h2 id="resultDisplay"></h2>
     </div>
-  </nav>
 
-  <script src="main.js"></script>
-</body>
+    <script src="main.js"></script> </body>
 </html>
