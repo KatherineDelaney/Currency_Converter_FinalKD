@@ -1,30 +1,22 @@
-// Get references to HTML elements
+// HTML elements
 const amountInput = document.getElementById("amount");
 const fromCurrencySelect = document.getElementById("fromCurrency");
 const toCurrencySelect = document.getElementById("toCurrency");
 const convertBtn = document.getElementById("convertBtn");
 const resultEl = document.getElementById("result");
 const chartCanvas = document.getElementById("conversionChart");
-const historyList = document.getElementById("historyList"); // Added for action.html
+const historyList = document.getElementById("historyList");
 
-// Variables to store the chart and conversion history
 let chart;
 let history = [];
 
-/**
- * Fetch conversion history from the backend
- */
+// --- Fetch conversion history ---
 async function fetchHistory() {
   try {
-    // Request conversion history from the server -- port 3001 is correct I checked 
     const res = await fetch("/api/history");
-    
     if (!res.ok) throw new Error("Failed to fetch history");
 
-    // Convert response to JSON and store it
     history = await res.json();
-    
-    // Update the UI components
     updateChart();
     renderHistoryList();
   } catch (err) {
@@ -32,30 +24,20 @@ async function fetchHistory() {
   }
 }
 
-/**
- * Save a new conversion to the backend
- */
+// --- Save conversion ---
 async function saveConversion(from, to, amount) {
   try {
     resultEl.textContent = "Converting...";
-
-    // Send conversion data to the server
-    const res = await fetch(""/api/save-conversion", {
+    const res = await fetch("/api/save-conversion", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ from, to, amount })
     });
 
     const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Server error");
 
-    if (!res.ok) {
-      throw new Error(data.error || "Server error");
-    }
-
-    // Display the conversion result on the page
     resultEl.textContent = `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
-
-    // Refresh the conversion history and chart
     await fetchHistory();
   } catch (err) {
     console.error("Conversion Error:", err);
@@ -63,30 +45,22 @@ async function saveConversion(from, to, amount) {
   }
 }
 
-/**
- * Updates the text-based history list on action.html
- */
+// --- Render history list ---
 function renderHistoryList() {
   if (!historyList) return;
-
   historyList.innerHTML = history.map(item => `
     <div class="history-item" style="padding: 10px; border-bottom: 1px solid #eee;">
-      <strong>${new Date(item.created_at).toLocaleString()}</strong>: 
+      <strong>${dayjs(item.created_at).format("MMM D, YYYY h:mm A")}</strong>: 
       ${item.amount} ${item.from_currency} ⮕ ${item.result} ${item.to_currency}
     </div>
   `).join('');
 }
 
-/**
- * Update the Chart.js graph
- */
+// --- Update chart ---
 function updateChart() {
   if (!chartCanvas || history.length === 0) return;
 
-  const labels = history.slice(0, 10).reverse().map(item => 
-    new Date(item.created_at).toLocaleTimeString()
-  );
-
+  const labels = history.slice(0, 10).reverse().map(item => dayjs(item.created_at).format("h:mm:ss A"));
   const values = history.slice(0, 10).reverse().map(item => item.result);
 
   if (chart) chart.destroy();
@@ -111,22 +85,42 @@ function updateChart() {
   });
 }
 
-/**
- * Event listener for the Convert button
- */
+// --- Load currencies from Frankfurter API ---
+async function loadCurrencies() {
+  try {
+    const res = await fetch("https://api.frankfurter.app/currencies");
+    const currencies = await res.json();
+
+    fromCurrencySelect.innerHTML = "";
+    toCurrencySelect.innerHTML = "";
+
+    for (const code in currencies) {
+      const option1 = document.createElement("option");
+      option1.value = code;
+      option1.textContent = code;
+
+      const option2 = option1.cloneNode(true);
+
+      fromCurrencySelect.appendChild(option1);
+      toCurrencySelect.appendChild(option2);
+    }
+  } catch (err) {
+    console.error("Currency Load Error:", err);
+  }
+}
+
+// --- Convert button ---
 if (convertBtn) {
   convertBtn.addEventListener("click", () => {
     const amount = parseFloat(amountInput.value);
     const from = fromCurrencySelect.value;
     const to = toCurrencySelect.value;
 
-    // Validation: Check for valid number
     if (isNaN(amount) || amount <= 0) {
       resultEl.textContent = "Please enter a valid amount.";
       return;
     }
 
-    // Validation: Prevent same-currency conversion (Frankfurter API requirement)
     if (from === to) {
       resultEl.textContent = "Please select two different currencies.";
       return;
@@ -136,7 +130,8 @@ if (convertBtn) {
   });
 }
 
-// Run when the page finishes loading
+// --- Initialize page ---
 document.addEventListener("DOMContentLoaded", () => {
-  fetchHistory();
+  loadCurrencies();   // ✅ Fetch #1
+  fetchHistory();     // ✅ Fetch #2
 });
