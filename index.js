@@ -1,18 +1,24 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const { createClient } = require('@supabase/supabase-js');
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
+require('dotenv').config(); // Simplifies loading variables
 
 const app = express();
 const port = process.env.PORT || 3000;
-dotenv.config();
 
-// Initialize Supabase
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+// Initialize Supabase ONLY if variables exist
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error("ERROR: Supabase Environment Variables are missing!");
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(bodyParser.json());
-// Serves everything in the public folder automatically
 app.use(express.static(__dirname + '/public'));
 
 // HTML Routes
