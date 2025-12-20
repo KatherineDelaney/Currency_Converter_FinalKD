@@ -22,8 +22,7 @@ To run this application locally, you will need the following installed on your m
 
 ### Step 1: Clone the Repository
 
-git clone https://github.com/your-username/study-abroad-pay.git
-cd study-abroad-pay
+git clone 
 
 ### Step 2: Install Dependencies
 Navigate to the server directory and install dependencies:
