@@ -7,19 +7,17 @@ import supabase from "./supabaseClient.js";
 
 const app = express();
 
-// Helper to find the current folder
+// Helper to find current folder
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
 
-// 1. SERVE STATIC FILES FIRST
-// This ensures that when index.html asks for style.css, Express finds it.
-app.use(express.static(__dirname));
+// Serve static files from "public" folder
+app.use(express.static(path.join(__dirname, "public")));
 
 // --- API ROUTES ---
-
 app.post("/api/save-conversion", async (req, res) => {
   const { from, to, amount } = req.body;
   try {
@@ -51,18 +49,18 @@ app.get("/api/history", async (req, res) => {
 });
 
 // --- PAGE ROUTES ---
-// This tells Vercel which HTML file to show for each link
-app.get('/index', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
-app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
-app.get('/help', (req, res) => res.sendFile(path.join(__dirname, 'help.html')));
-app.get('/action', (req, res) => res.sendFile(path.join(__dirname, 'action.html')));
+const pages = ["index", "about", "help", "action"];
+pages.forEach(page => {
+  app.get(`/${page}`, (req, res) =>
+    res.sendFile(path.join(__dirname, "public", `${page}.html`))
+  );
+});
 
-// 2. CRITICAL FOR VERCEL
-// We export the app so Vercel can run it as a serverless function
+// Export app for Vercel
 export default app;
 
-// Keep this for local testing
+// Local server for testing
 const PORT = process.env.PORT || 3001;
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
