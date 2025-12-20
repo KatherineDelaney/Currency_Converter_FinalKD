@@ -6,12 +6,14 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/api/(.*)", "dest": "index.js" },
-    { "src": "/action", "dest": "index.js" },
-    { "src": "/about", "dest": "index.js" },
-    { "src": "/help", "dest": "index.js" },
-    { "src": "/(.*)", "dest": "index.js" }
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "index.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "index.js"
+    }
   ]
 }
