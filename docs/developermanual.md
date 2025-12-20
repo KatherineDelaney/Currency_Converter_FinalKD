@@ -106,4 +106,4 @@ Automated testing for backend endpoints
 Deployment to a production hosting environment
 
 ## Documentation Location
-All documentation for this project is included in the main project directory under the docs.md in the docs folder. 
+All documentation for this project is included in the main project directory under the developermanual.md in the docs folder. 
